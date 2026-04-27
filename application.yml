@@ -1,0 +1,24 @@
+server: # Cấu hình cổng mạng để Render có thể đọc được
+  port: ${PORT:2333}
+  address: 0.0.0.0
+
+lavalink:
+  plugins:
+    # Cài đặt Plugin YouTube xịn nhất để không bị YouTube chặn IP
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.4"
+      repository: "https://maven.lavalink.dev/releases"
+  server:
+    password: "youshallnotpass" # Mật khẩu để bot của bạn kết nối vào
+    sources:
+      youtube: false # Tắt Youtube mặc định vì đã dùng Plugin ở trên
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    bufferDurationMs: 400 # Tối ưu hóa bộ đệm âm thanh
+    youtubePlaylistLoadLimit: 6 # Giới hạn tải playlist để tránh sập RAM trên Render
+    playerUpdateInterval: 5 # Tần suất cập nhật thời lượng bài hát
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
