@@ -1,24 +1,80 @@
-server: # Cấu hình cổng mạng để Render có thể đọc được
+# application.yml — Lavalink ổn định cho Euphoria Music
+
+```yml
+server:
   port: ${PORT:2333}
   address: 0.0.0.0
 
 lavalink:
   plugins:
-    # Cài đặt Plugin YouTube xịn nhất để không bị YouTube chặn IP
-    - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.4"
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.1"
       repository: "https://maven.lavalink.dev/releases"
+
   server:
-    password: "youshallnotpass" # Mật khẩu để bot của bạn kết nối vào
+    password: "youshallnotpass"
+
     sources:
-      youtube: false # Tắt Youtube mặc định vì đã dùng Plugin ở trên
-      bandcamp: true
+      youtube: false
       soundcloud: true
+      bandcamp: true
       twitch: true
       vimeo: true
       http: true
       local: false
-    bufferDurationMs: 400 # Tối ưu hóa bộ đệm âm thanh
-    youtubePlaylistLoadLimit: 6 # Giới hạn tải playlist để tránh sập RAM trên Render
-    playerUpdateInterval: 5 # Tần suất cập nhật thời lượng bài hát
-    youtubeSearchEnabled: true
+
+    youtubePlaylistLoadLimit: 6
+
+    playerUpdateInterval: 5
+
+    bufferDurationMs: 400
+
+    frameBufferDurationMs: 5000
+
+    opusEncodingQuality: 10
+
+    resamplingQuality: HIGH
+
+    trackStuckThresholdMs: 10000
+
+    useSeekGhosting: true
+
+    gc-warnings: true
+
     soundcloudSearchEnabled: true
+
+metrics:
+  prometheus:
+    enabled: false
+
+sentry:
+  dsn: ""
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
+    dev.lavalink.youtube: INFO
+    org.springframework: WARN
+
+plugins:
+  youtube:
+    enabled: true
+
+    allowSearch: true
+
+    allowDirectVideoIds: true
+
+    allowDirectPlaylistIds: true
+
+    clients:
+      - MUSIC
+      - ANDROID
+      - TVHTML5
+      - WEB
+
+    playlistLoading: true
+
+    videoLoading: true
+
+    searching: true
+```
